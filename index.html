@@ -20,6 +20,7 @@
             align-items: center;
             color: white;
             padding: 20px;
+            position: relative;
         }
         
         .container {
@@ -203,6 +204,26 @@
             border: 1px solid #e74c3c;
         }
         
+        /* Время последнего обновления */
+        .last-updated {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(22, 33, 62, 0.9);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            color: #7289DA;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+        
+        .last-updated span {
+            color: #ccc;
+        }
+        
         @media (max-width: 480px) {
             .card {
                 padding: 20px;
@@ -215,6 +236,13 @@
             .btn {
                 width: 100%;
                 margin: 5px 0;
+            }
+            
+            .last-updated {
+                bottom: 10px;
+                right: 10px;
+                font-size: 0.7em;
+                padding: 8px 12px;
             }
         }
     </style>
@@ -262,7 +290,7 @@
                         <option value="Officer">Офицер</option>
                         <option value="Sergeant">Сержант</option>
                         <option value="Lieutenant">Лейтенант</option>
-                        <option value="Pidor">Пидорас</option>
+                        <option value="Captain">Капитан</option>
                     </select>
                 </div>
                 
@@ -273,15 +301,40 @@
             </div>
         </div>
     </div>
+    
+    <!-- Время последнего обновления -->
+    <div class="last-updated" id="lastUpdated">
+        Последнее обновление: <span id="updateTime">Загрузка...</span>
+    </div>
 
     <script>
         const CLIENT_ID = '1464524362005741720';
         const REDIRECT_URI = 'https://redwsss.github.io/mysite/';
-        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1541306556883406959/ZLvm0dNuev9wXpOJopO3uFlor65j9YwxKp-B97H3qHcrlq1fWE1ggV6pC8iJmpQyIMgR';
+        const WEBHOOK_URL = 'ВСТАВЬ_СВОЙ_ВЕБХУК_СЮДА';
         
         let currentUser = null;
         
+        // Функция обновления времени
+        function updateLastUpdated() {
+            const now = new Date();
+            const options = { 
+                day: '2-digit', 
+                month: '2-digit', 
+                year: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            const formattedTime = now.toLocaleString('ru-RU', options);
+            document.getElementById('updateTime').textContent = formattedTime;
+        }
+        
+        // Обновляем время каждую секунду
+        setInterval(updateLastUpdated, 1000);
+        
         window.onload = function() {
+            updateLastUpdated();
+            
             if (window.location.hash) {
                 const params = new URLSearchParams(window.location.hash.substring(1));
                 const token = params.get('access_token');
@@ -387,8 +440,9 @@
                     alert('✅ Заявка отправлена!');
                     document.getElementById('charName').value = '';
                     document.getElementById('charAge').value = '';
+                    updateLastUpdated();
                 } else {
-                    alert('❌ Ошибка отправки! Попробуйте позже.');
+                    alert('❌ Ошибка отправки! Статус: ' + response.status);
                 }
             } catch (error) {
                 alert('❌ Ошибка: ' + error.message);
