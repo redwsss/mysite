@@ -5,89 +5,282 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MST Операция</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background: #1a1a2e;
-            color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .card {
-            background: #16213e;
-            padding: 50px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 500px;
-        }
-        .btn {
-            background: #5865F2;
             color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin: 10px;
+            padding: 20px;
         }
-        .btn:hover {
-            background: #4752c4;
+        
+        .container {
+            width: 100%;
+            max-width: 600px;
         }
+        
+        .card {
+            background: rgba(22, 33, 62, 0.95);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
         .avatar {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            margin: 20px auto;
+            margin: 0 auto 20px;
+            border: 3px solid #5865F2;
+            box-shadow: 0 0 30px rgba(88, 101, 242, 0.5);
             display: none;
         }
+        
+        .user-info {
+            margin: 20px 0;
+        }
+        
+        .user-info h2 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        
+        .user-info p {
+            color: #aaa;
+        }
+        
+        .form-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 0.9em;
+        }
+        
         input, select {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            border: 2px solid #2a2a3e;
             background: #1a1a2e;
             color: white;
+            font-size: 1em;
+            transition: all 0.3s;
+            outline: none;
+        }
+        
+        input:focus, select:focus {
+            border-color: #5865F2;
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.3);
+        }
+        
+        input::placeholder {
+            color: #555;
+        }
+        
+        select option {
+            background: #1a1a2e;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 8px 5px;
+            text-decoration: none;
+            width: 200px;
+        }
+        
+        .btn-discord {
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            color: white;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4);
+        }
+        
+        .btn-discord:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.6);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(46, 204, 113, 0.6);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.6);
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+        }
+        
+        .section-title {
+            font-size: 1.2em;
+            color: #7289DA;
+            margin-bottom: 15px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        
+        .status-verified {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+        
+        .status-not-verified {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card" id="content">
-        <h1>🚔 MST Операция</h1>
-        <p id="message">Проверка авторизации...</p>
-        <div id="userInfo" style="display: none;">
-            <img id="avatar" class="avatar" src="" alt="Avatar">
-            <h2 id="username"></h2>
-            <p id="userId"></p>
+    <div class="container">
+        <div class="card">
+            <div class="logo">🚔</div>
+            <h1>MST Операция</h1>
+            <p class="subtitle" id="message">Проверка авторизации...</p>
             
-            <!-- Форма заявки -->
-            <div id="applicationForm">
-                <h3>📋 Подать заявку</h3>
-                <input type="text" id="charName" placeholder="Имя персонажа">
-                <input type="number" id="charAge" placeholder="Возраст">
-                <select id="charRank">
-                    <option value="Cadet">Кадет</option>
-                    <option value="Officer">Офицер</option>
-                    <option value="Sergeant">Сержант</option>
-                    <option value="Lieutenant">Лейтенант</option>
-                </select>
-                <button class="btn" onclick="submitApplication()">Отправить заявку</button>
+            <!-- Не авторизован -->
+            <div id="loginSection" style="display: none;">
+                <div class="divider"></div>
+                <button id="loginBtn" class="btn btn-discord">Войти через Discord</button>
+            </div>
+            
+            <!-- Авторизован -->
+            <div id="userSection" style="display: none;">
+                <img id="avatar" class="avatar" src="" alt="Avatar">
+                <div class="user-info">
+                    <h2 id="username"></h2>
+                    <p id="userId"></p>
+                    <span id="verificationStatus" class="status-badge status-not-verified">Не верифицирован</span>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="section-title">📋 Подать заявку</div>
+                
+                <div class="form-group">
+                    <label>Имя персонажа</label>
+                    <input type="text" id="charName" placeholder="Например: Иван">
+                </div>
+                
+                <div class="form-group">
+                    <label>Возраст</label>
+                    <input type="number" id="charAge" placeholder="Например: 25" min="16" max="60">
+                </div>
+                
+                <div class="form-group">
+                    <label>Желаемый ранг</label>
+                    <select id="charRank">
+                        <option value="Cadet">Кадет</option>
+                        <option value="Officer">Офицер</option>
+                        <option value="Sergeant">Сержант</option>
+                        <option value="Lieutenant">Лейтенант</option>
+                        <option value="Captain">Капитан</option>
+                    </select>
+                </div>
+                
+                <div class="btn-container">
+                    <button class="btn btn-success" onclick="submitApplication()">Отправить заявку</button>
+                    <button class="btn btn-danger" onclick="logout()">Выйти</button>
+                </div>
             </div>
         </div>
-        <button id="loginBtn" class="btn" style="display: none;">Войти через Discord</button>
-        <button id="logoutBtn" class="btn" style="display: none; background: #e74c3c;">Выйти</button>
     </div>
 
     <script>
         const CLIENT_ID = '1464524362005741720';
         const REDIRECT_URI = 'https://redwsss.github.io/mysite/';
-        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1541306556883406959/ZLvm0dNuev9wXpOJopO3uFlor65j9YwxKp-B97H3qHcrlq1fWE1ggV6pC8iJmpQyIMgR'; // Вставь свой
-
+        const WEBHOOK_URL = 'ВСТАВЬ_СВОЙ_ВЕБХУК_СЮДА';
+        
         let currentUser = null;
-
-        // Проверка при загрузке
+        
         window.onload = function() {
             if (window.location.hash) {
                 const params = new URLSearchParams(window.location.hash.substring(1));
@@ -107,18 +300,18 @@
                 }
             }
         };
-
+        
         function showLogin() {
             document.getElementById('message').textContent = 'Войдите через Discord';
-            document.getElementById('loginBtn').style.display = 'block';
+            document.getElementById('loginSection').style.display = 'block';
             document.getElementById('loginBtn').onclick = login;
         }
-
+        
         function login() {
             const authUrl = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`;
             window.location.href = authUrl;
         }
-
+        
         async function loadUserData(token) {
             try {
                 const response = await fetch('https://discord.com/api/users/@me', {
@@ -130,33 +323,42 @@
                 const user = await response.json();
                 currentUser = user;
                 
-                document.getElementById('message').textContent = '✅ Авторизован!';
-                document.getElementById('userInfo').style.display = 'block';
+                document.getElementById('message').textContent = 'Добро пожаловать!';
+                document.getElementById('userSection').style.display = 'block';
                 document.getElementById('username').textContent = user.username;
                 document.getElementById('userId').textContent = `ID: ${user.id}`;
                 
                 if (user.avatar) {
-                    document.getElementById('avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
-                    document.getElementById('avatar').style.display = 'block';
+                    const avatar = document.getElementById('avatar');
+                    avatar.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
+                    avatar.style.display = 'block';
                 }
-                
-                document.getElementById('logoutBtn').style.display = 'block';
-                document.getElementById('logoutBtn').onclick = logout;
                 
             } catch (error) {
                 localStorage.removeItem('discord_token');
                 showLogin();
             }
         }
-
-        // Отправка заявки через вебхук
+        
         async function submitApplication() {
-            const charName = document.getElementById('charName').value;
-            const charAge = document.getElementById('charAge').value;
+            const charName = document.getElementById('charName').value.trim();
+            const charAge = document.getElementById('charAge').value.trim();
             const charRank = document.getElementById('charRank').value;
             
-            if (!charName || !charAge) {
-                alert('Заполните все поля!');
+            if (!charName) {
+                alert('❌ Введите имя персонажа!');
+                document.getElementById('charName').focus();
+                return;
+            }
+            
+            if (!charAge || charAge < 16 || charAge > 60) {
+                alert('❌ Введите корректный возраст (16-60)!');
+                document.getElementById('charAge').focus();
+                return;
+            }
+            
+            if (!currentUser) {
+                alert('❌ Вы не авторизованы!');
                 return;
             }
             
@@ -164,12 +366,13 @@
                 title: '📋 Новая заявка',
                 color: 0x5865F2,
                 fields: [
-                    { name: 'Discord', value: currentUser.username, inline: true },
-                    { name: 'ID', value: currentUser.id, inline: true },
-                    { name: 'Персонаж', value: charName, inline: true },
-                    { name: 'Возраст', value: charAge, inline: true },
-                    { name: 'Ранг', value: charRank, inline: true }
+                    { name: '👤 Discord', value: currentUser.username, inline: true },
+                    { name: '🆔 ID', value: currentUser.id, inline: true },
+                    { name: '🎮 Персонаж', value: charName, inline: true },
+                    { name: '📅 Возраст', value: charAge, inline: true },
+                    { name: '⭐ Ранг', value: charRank, inline: true }
                 ],
+                footer: { text: 'MST Операция' },
                 timestamp: new Date().toISOString()
             };
             
@@ -177,9 +380,7 @@
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        embeds: [embed]
-                    })
+                    body: JSON.stringify({ embeds: [embed] })
                 });
                 
                 if (response.ok) {
@@ -187,13 +388,13 @@
                     document.getElementById('charName').value = '';
                     document.getElementById('charAge').value = '';
                 } else {
-                    alert('❌ Ошибка отправки');
+                    alert('❌ Ошибка отправки! Попробуйте позже.');
                 }
             } catch (error) {
                 alert('❌ Ошибка: ' + error.message);
             }
         }
-
+        
         function logout() {
             localStorage.removeItem('discord_token');
             location.reload();
