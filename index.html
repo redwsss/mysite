@@ -3,456 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MST Операция</title>
+    <title>Моя биография</title>
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
         }
-        
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            padding: 20px;
-            position: relative;
-        }
-        
+        /* Прозрачный размытый слой для лучшей читаемости */
         .container {
-            width: 100%;
-            max-width: 600px;
-        }
-        
-        .card {
-            background: rgba(22, 33, 62, 0.95);
-            border-radius: 24px;
+            max-width: 800px;
+            margin: 50px auto;
             padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(10px);
-            text-align: center;
-        }
-        
-        .logo {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        
-        h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #5865F2, #7289DA);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .subtitle {
-            color: #aaa;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-        
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 3px solid #5865F2;
-            box-shadow: 0 0 30px rgba(88, 101, 242, 0.5);
-            display: none;
-        }
-        
-        .user-info {
-            margin: 20px 0;
-        }
-        
-        .user-info h2 {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
-        
-        .user-info p {
-            color: #aaa;
-        }
-        
-        .form-group {
-            margin: 15px 0;
-            text-align: left;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ccc;
-            font-size: 0.9em;
-        }
-        
-        input, select {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 2px solid #2a2a3e;
-            background: #1a1a2e;
-            color: white;
-            font-size: 1em;
-            transition: all 0.3s;
-            outline: none;
-        }
-        
-        input:focus, select:focus {
-            border-color: #5865F2;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.3);
-        }
-        
-        input::placeholder {
-            color: #555;
-        }
-        
-        select option {
-            background: #1a1a2e;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 14px 30px;
-            border-radius: 12px;
-            border: none;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 8px 5px;
-            text-decoration: none;
-            width: 200px;
-        }
-        
-        .btn-discord {
-            background: linear-gradient(135deg, #5865F2, #7289DA);
-            color: white;
-            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4);
-        }
-        
-        .btn-discord:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.6);
-        }
-        
-        .btn-success {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-            color: white;
-            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
-        }
-        
-        .btn-success:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(46, 204, 113, 0.6);
-        }
-        
-        .btn-danger {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
-        }
-        
-        .btn-danger:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.6);
-        }
-        
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        
-        .divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 20px 0;
-        }
-        
-        .section-title {
-            font-size: 1.2em;
-            color: #7289DA;
-            margin-bottom: 15px;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.9em;
-            margin: 5px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
-        
-        .status-verified {
-            background: rgba(46, 204, 113, 0.2);
-            color: #2ecc71;
-            border: 1px solid #2ecc71;
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 3rem;
+            margin-bottom: 10px;
         }
-        
-        .status-not-verified {
-            background: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-            border: 1px solid #e74c3c;
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            color: #2980b9;
         }
-        
-        /* Время последнего обновления */
-        .last-updated {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(22, 33, 62, 0.9);
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-size: 0.8em;
-            color: #7289DA;
-            border: 1px solid rgba(88, 101, 242, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
+        .avatar {
+            display: block;
+            margin: 0 auto 20px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        
-        .last-updated span {
-            color: #ccc;
-        }
-        
-        @media (max-width: 480px) {
-            .card {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 1.5em;
-            }
-            
-            .btn {
-                width: 100%;
-                margin: 5px 0;
-            }
-            
-            .last-updated {
-                bottom: 10px;
-                right: 10px;
-                font-size: 0.7em;
-                padding: 8px 12px;
-            }
+        p, li {
+            font-size: 18px;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="logo">🚔</div>
-            <h1>MST Операция</h1>
-            <p class="subtitle" id="message">Проверка авторизации...</p>
-            
-            <!-- Не авторизован -->
-            <div id="loginSection" style="display: none;">
-                <div class="divider"></div>
-                <button id="loginBtn" class="btn btn-discord">Войти через Discord</button>
-            </div>
-            
-            <!-- Авторизован -->
-            <div id="userSection" style="display: none;">
-                <img id="avatar" class="avatar" src="" alt="Avatar">
-                <div class="user-info">
-                    <h2 id="username"></h2>
-                    <p id="userId"></p>
-                    <span id="verificationStatus" class="status-badge status-not-verified">Не верифицирован</span>
-                </div>
-                
-                <div class="divider"></div>
-                
-                <div class="section-title">📋 Подать заявку</div>
-                
-                <div class="form-group">
-                    <label>Имя персонажа</label>
-                    <input type="text" id="charName" placeholder="Например: Иван">
-                </div>
-                
-                <div class="form-group">
-                    <label>Возраст</label>
-                    <input type="number" id="charAge" placeholder="Например: 25" min="16" max="60">
-                </div>
-                
-                <div class="form-group">
-                    <label>Желаемый ранг</label>
-                    <select id="charRank">
-                        <option value="Cadet">Кадет</option>
-                        <option value="Officer">Офицер</option>
-                        <option value="Sergeant">Сержант</option>
-                        <option value="Lieutenant">Лейтенант</option>
-                        <option value="Captain">Капитан</option>
-                    </select>
-                </div>
-                
-                <div class="btn-container">
-                    <button class="btn btn-success" onclick="submitApplication()">Отправить заявку</button>
-                    <button class="btn btn-danger" onclick="logout()">Выйти</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Время последнего обновления -->
-    <div class="last-updated" id="lastUpdated">
-        Последнее обновление: <span id="updateTime">Загрузка...</span>
-    </div>
 
-    <script>
-        const CLIENT_ID = '1464524362005741720';
-        const REDIRECT_URI = 'https://redwsss.github.io/mysite/';
-        const WEBHOOK_URL = 'ВСТАВЬ_СВОЙ_ВЕБХУК_СЮДА';
-        
-        let currentUser = null;
-        
-        // Функция обновления времени
-        function updateLastUpdated() {
-            const now = new Date();
-            const options = { 
-                day: '2-digit', 
-                month: '2-digit', 
-                year: 'numeric',
-                hour: '2-digit', 
-                minute: '2-digit',
-                second: '2-digit'
-            };
-            const formattedTime = now.toLocaleString('ru-RU', options);
-            document.getElementById('updateTime').textContent = formattedTime;
-        }
-        
-        // Обновляем время каждую секунду
-        setInterval(updateLastUpdated, 1000);
-        
-        window.onload = function() {
-            updateLastUpdated();
-            
-            if (window.location.hash) {
-                const params = new URLSearchParams(window.location.hash.substring(1));
-                const token = params.get('access_token');
-                
-                if (token) {
-                    localStorage.setItem('discord_token', token);
-                    window.location.hash = '';
-                    loadUserData(token);
-                }
-            } else {
-                const savedToken = localStorage.getItem('discord_token');
-                if (savedToken) {
-                    loadUserData(savedToken);
-                } else {
-                    showLogin();
-                }
-            }
-        };
-        
-        function showLogin() {
-            document.getElementById('message').textContent = 'Войдите через Discord';
-            document.getElementById('loginSection').style.display = 'block';
-            document.getElementById('loginBtn').onclick = login;
-        }
-        
-        function login() {
-            const authUrl = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`;
-            window.location.href = authUrl;
-        }
-        
-        async function loadUserData(token) {
-            try {
-                const response = await fetch('https://discord.com/api/users/@me', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                
-                if (!response.ok) throw new Error('Invalid token');
-                
-                const user = await response.json();
-                currentUser = user;
-                
-                document.getElementById('message').textContent = 'Добро пожаловать!';
-                document.getElementById('userSection').style.display = 'block';
-                document.getElementById('username').textContent = user.username;
-                document.getElementById('userId').textContent = `ID: ${user.id}`;
-                
-                if (user.avatar) {
-                    const avatar = document.getElementById('avatar');
-                    avatar.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
-                    avatar.style.display = 'block';
-                }
-                
-            } catch (error) {
-                localStorage.removeItem('discord_token');
-                showLogin();
-            }
-        }
-        
-        async function submitApplication() {
-            const charName = document.getElementById('charName').value.trim();
-            const charAge = document.getElementById('charAge').value.trim();
-            const charRank = document.getElementById('charRank').value;
-            
-            if (!charName) {
-                alert('❌ Введите имя персонажа!');
-                document.getElementById('charName').focus();
-                return;
-            }
-            
-            if (!charAge || charAge < 16 || charAge > 60) {
-                alert('❌ Введите корректный возраст (16-60)!');
-                document.getElementById('charAge').focus();
-                return;
-            }
-            
-            if (!currentUser) {
-                alert('❌ Вы не авторизованы!');
-                return;
-            }
-            
-            const embed = {
-                title: '📋 Новая заявка',
-                color: 0x5865F2,
-                fields: [
-                    { name: '👤 Discord', value: currentUser.username, inline: true },
-                    { name: '🆔 ID', value: currentUser.id, inline: true },
-                    { name: '🎮 Персонаж', value: charName, inline: true },
-                    { name: '📅 Возраст', value: charAge, inline: true },
-                    { name: '⭐ Ранг', value: charRank, inline: true }
-                ],
-                footer: { text: 'MST Операция' },
-                timestamp: new Date().toISOString()
-            };
-            
-            try {
-                const response = await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ embeds: [embed] })
-                });
-                
-                if (response.ok) {
-                    alert('✅ Заявка отправлена!');
-                    document.getElementById('charName').value = '';
-                    document.getElementById('charAge').value = '';
-                    updateLastUpdated();
-                } else {
-                    alert('❌ Ошибка отправки! Статус: ' + response.status);
-                }
-            } catch (error) {
-                alert('❌ Ошибка: ' + error.message);
-            }
-        }
-        
-        function logout() {
-            localStorage.removeItem('discord_token');
-            location.reload();
-        }
-    </script>
+<div class="container">
+    <!-- Чтобы вставить свое фото, загрузите его в репозиторий с именем myavatar.jpg -->
+    <img src="myavatar.jpg" class="avatar" alt="Моё фото">
+    
+    <h1>Ваше Имя</h1>
+    <p style="text-align: center;">Ваш слоган или профессия</p>
+
+    <h2>Обо мне</h2>
+    <p>Напишите здесь немного о себе. Что вы любите, чем занимаетесь.</p>
+
+    <h2>Мои достижения</h2>
+    <ul>
+        <li>Первое достижение</li>
+        <li>Второе достижение</li>
+        <li>Третье достижение</li>
+    </ul>
+
+    <h2>Мои фото</h2>
+    <!-- Чтобы вставить картинку в статью, загрузите её и вставьте код ниже -->
+    <img src="photo1.jpg" alt="Описание фото" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
+    
+    <h2>Контакты</h2>
+    <p>Вконтакте / Telegram / Почта: <b>ваш_ник</b></p>
+</div>
+
 </body>
 </html>
