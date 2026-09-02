@@ -3,137 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roshidere | Биография Алисы</title>
-    <!-- Японский шрифт -->
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Serif+JP:wght@600;900&display=swap" rel="stylesheet">
+    <title>Roshidere Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --accent: #86b7fe; /* Нежно-голубой, как глаза Алисы */
+            --accent: #86b7fe;
             --text: #1e293b;
-            --bg-glass: rgba(255, 255, 255, 0.65);
+            --glass: rgba(255, 255, 255, 0.7);
         }
 
-        /* Фон с Алисой и красивой сеткой */
         body {
             margin: 0;
             padding: 0;
-            background-image: url('bg.jpg'), linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8));
+            background-image: url('bg.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             font-family: 'M PLUS Rounded 1c', sans-serif;
             color: var(--text);
             min-height: 100vh;
-            position: relative;
         }
 
-        /* Эффект "красивой клетки" (сетка + легкое размытие) */
+        /* Сетка поверх фона */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
-                linear-gradient(rgba(134, 183, 254, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(134, 183, 254, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px; /* Размер клеток */
-            backdrop-filter: blur(3px); /* Легкое размытие фона */
+                linear-gradient(rgba(134, 183, 254, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(134, 183, 254, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            backdrop-filter: blur(4px);
             z-index: -1;
-            animation: gridMove 20s linear infinite;
         }
 
-        @keyframes gridMove {
-            from { background-position: 0 0; }
-            to { background-position: 40px 40px; }
-        }
-
-        /* Стеклянная карточка */
         .container {
             max-width: 900px;
             margin: 40px auto;
             padding: 30px;
-            background: var(--bg-glass);
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(255, 255, 255, 0.6);
+            background: var(--glass);
+            backdrop-filter: blur(15px);
             border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
             position: relative;
         }
 
-        /* Кнопка редактирования */
-        .edit-btn {
-            position: absolute;
+        /* Главная кнопка редактирования */
+        .top-btn {
+            position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--accent);
+            background: #2563eb;
+            color: white;
             border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+            z-index: 100;
             transition: 0.3s;
         }
-        .edit-btn:hover { background: #60a5fa; transform: scale(1.1); }
+        .top-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
 
-        /* Аватар */
+        /* Аватар и фото */
         .avatar {
             display: block;
-            margin: 0 auto;
+            margin: 0 auto 20px;
             width: 180px;
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #86b7fe, #fbcfe8);
+            position: relative;
         }
-        .avatar:hover { transform: scale(1.05); }
-
-        /* Заголовки */
+        
+        /* Секции */
         h1 {
-            text-align: center;
             font-family: 'Noto Serif JP', serif;
             font-size: 3rem;
             color: #1e3a8a;
-            margin-top: 10px;
-            text-shadow: 2px 2px 10px rgba(255,255,255,0.8);
-            cursor: text;
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #64748b;
-            letter-spacing: 2px;
-            border-bottom: 2px solid rgba(255,255,255,0.5);
-            padding-bottom: 20px;
-            cursor: text;
+            margin: 10px 0;
+            cursor: pointer;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
         }
 
-        /* Секции */
+        .subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 40px;
+            cursor: pointer;
+        }
+
         .section {
-            margin-top: 30px;
+            margin: 20px auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
             border-left: 5px solid var(--accent);
-            cursor: text;
+            cursor: pointer;
+            max-width: 600px;
+            text-align: left;
         }
 
         h2 {
             font-family: 'Noto Serif JP', serif;
             color: #2563eb;
             margin-top: 0;
-            font-size: 1.8rem;
         }
 
-        /* Скрытая загрузка файлов */
-        #fileInput, #photoInput { display: none; }
-
-        /* Модальное окно с паролем */
+        /* Окно пароля */
         .modal {
             display: none;
             position: fixed;
@@ -153,7 +138,7 @@
             width: 300px;
         }
         .modal input {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -174,62 +159,122 @@
             margin-top: 15px;
             font-size: 12px;
             color: #888;
+            cursor: pointer;
         }
 
-        /* Стили для режима редактирования */
+        /* Скрытые инпуты для файлов */
+        #fileInput, #photoInput { display: none; }
+
+        /* Кнопки после входа в режим редактирования */
+        .save-bar {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+            z-index: 1000;
+            border: none;
+        }
+        .save-bar:hover { background: #059669; }
+        
+        /* Редактируемые поля */
         [contenteditable="true"] {
             outline: 2px dashed var(--accent);
             outline-offset: 5px;
-            transition: 0.2s;
+            background: rgba(255,255,255,0.3);
         }
     </style>
 </head>
 <body>
 
-<!-- Модальное окно пароля -->
+<!-- Кнопка входа -->
+<button class="top-btn" onclick="openEditor()" id="editBtn">✏️ Редактировать</button>
+<!-- Кнопка сохранения -->
+<button class="save-bar" id="saveBtn" onclick="saveChanges()">💾 Сохранить изменения</button>
+
+<!-- Модалка пароля -->
 <div class="modal" id="passwordModal">
     <div class="modal-content">
-        <h3 style="font-family: 'Noto Serif JP'; color: #2563eb;">🔒 Режим редактирования</h3>
-        <p style="font-size: 14px;">Введите пароль для изменения сайта:</p>
+        <h3>🔒 Редактирование</h3>
+        <p>Введите пароль:</p>
         <input type="password" id="passwordInput" placeholder="Пароль">
         <button onclick="checkPassword()">Войти</button>
         <p class="hint" id="hintText"></p>
-        <p class="hint" style="cursor: pointer; color: #86b7fe;" onclick="showHint()">Забыли пароль?</p>
+        <p class="hint" onclick="showHint()">Забыли пароль?</p>
     </div>
 </div>
 
 <div class="container">
-    <button class="edit-btn" onclick="openEditor()" title="Редактировать сайт">✏️</button>
+    <!-- Фото профиля -->
+    <img src="" id="avatarImg" class="avatar" onclick="uploadAvatar()" title="Нажмите, чтобы сменить фото">
+    <input type="file" id="fileInput" accept="image/*" onchange="changeAvatar(this)">
 
-    <!-- Аватарка -->
-    <img src="bg.jpg" class="avatar" id="avatarImg" onclick="changeAvatar()" alt="Аватар" title="Нажмите, чтобы сменить фото (для этого войдите в режим редактора)">
-    <input type="file" id="fileInput" accept="image/*" onchange="uploadAvatar(this)">
+    <!-- Тексты -->
+    <h1 id="nameText" onclick="activateEdit()">Алиса Куджо</h1>
+    <div class="subtitle" id="subtitleText" onclick="activateEdit()">アリサ・クジョウ — Эстетика Рошидере</div>
 
-    <h1 id="nameText">Алиса Куджо</h1>
-    <div class="subtitle" id="subtitleText">「 アリサ・クジョウ 」 — Загадочная красота</div>
-
-    <div class="section">
+    <div class="section" onclick="activateEdit()">
         <h2>Обо мне</h2>
-        <p id="aboutText">Я — ваш идеальный персонаж. Люблю красивые моменты, эстетику аниме, и немного загадочности. Нажмите на карандаш сверху, чтобы редактировать этот текст.</p>
+        <p id="aboutText">Я — идеальный персонаж. Люблю красивые моменты, эстетику аниме и немного загадочности. Нажмите на кнопку "Редактировать", чтобы изменить этот текст.</p>
     </div>
 
-    <div class="section">
-        <h2>Фотография</h2>
-        <img src="bg.jpg" id="photoImg" style="width: 100%; border-radius: 15px; cursor: pointer;" onclick="changePhoto()" alt="Фото">
-        <input type="file" id="photoInput" accept="image/*" onchange="uploadPhoto(this)">
+    <div class="section" onclick="activateEdit()">
+        <h2>Галерея</h2>
+        <img src="" id="photoImg" style="width: 100%; border-radius: 15px; cursor: pointer; margin-top: 10px;" onclick="uploadPhoto()" alt="Фото">
+        <input type="file" id="photoInput" accept="image/*" onchange="changePhoto(this)">
     </div>
-
-    <div class="section" style="text-align: center;">
-        <h2 style="font-size: 1.4rem;">Спасибо за внимание!</h2>
-        <p style="color: #555;">「 素敵な一日を 」 (Хорошего дня)</p>
-    </div>
+    
+    <p style="color: #888; margin-top: 30px;">「 素敵な一日を 」 (Хорошего дня)</p>
 </div>
 
 <script>
-    // Система хранения данных
-    const isEditing = { status: false };
+    let isEditMode = false;
 
-    // Открытие модального окна
+    // Загрузка данных при старте
+    window.onload = function() {
+        // Если есть сохраненные данные, подставляем их
+        const saved = localStorage.getItem('roshidere_data');
+        if (saved) {
+            const data = JSON.parse(saved);
+            if(data.name) document.getElementById('nameText').innerText = data.name;
+            if(data.subtitle) document.getElementById('subtitleText').innerText = data.subtitle;
+            if(data.about) document.getElementById('aboutText').innerText = data.about;
+        }
+        
+        // Загрузка фото
+        const savedAvatar = localStorage.getItem('avatar_base64');
+        const savedPhoto = localStorage.getItem('photo_base64');
+        
+        if (savedAvatar) {
+            document.getElementById('avatarImg').src = savedAvatar;
+        } else {
+            // Если нет фото, пробуем загрузить bg.jpg как аватар
+            document.getElementById('avatarImg').src = 'bg.jpg';
+            // Если bg.jpg нет, скроем аватар и покажем градиент
+            document.getElementById('avatarImg').onerror = function() {
+                this.style.display = 'none';
+            };
+        }
+
+        if (savedPhoto) {
+            document.getElementById('photoImg').src = savedPhoto;
+        } else {
+            document.getElementById('photoImg').src = 'bg.jpg';
+            document.getElementById('photoImg').onerror = function() {
+                this.style.display = 'none';
+            };
+        }
+    };
+
+    // Открытие окна пароля
     function openEditor() {
         document.getElementById('passwordModal').style.display = 'flex';
         document.getElementById('hintText').innerText = '';
@@ -240,105 +285,96 @@
     function checkPassword() {
         const pass = document.getElementById('passwordInput').value;
         if (pass === 'SorV') {
-            isEditing.status = true;
             document.getElementById('passwordModal').style.display = 'none';
-            enableEditing();
+            startEditing();
         } else {
             document.getElementById('hintText').innerText = 'Неверный пароль';
         }
     }
 
-    // Подсказка
     function showHint() {
         document.getElementById('hintText').innerText = '💡 Главный выбор сентября';
     }
 
-    // Включение редактирования
-    function enableEditing() {
+    // Включение режима редактирования
+    function startEditing() {
+        isEditMode = true;
+        // Показываем кнопку сохранения
+        document.getElementById('saveBtn').style.display = 'block';
+        // Делаем элементы редактируемыми
         const texts = ['nameText', 'subtitleText', 'aboutText'];
         texts.forEach(id => {
             const el = document.getElementById(id);
             el.contentEditable = "true";
-            el.style.cursor = "text";
-            el.addEventListener('blur', () => saveContent());
+            el.style.backgroundColor = "rgba(255,255,255,0.4)";
         });
-        
-        alert('Режим редактирования включен! Кликните по тексту, чтобы изменить его. Кликните по фото, чтобы загрузить новое.');
+        alert('Режим редактирования включен! Кликните на текст, чтобы изменить его, и нажмите "Сохранить". Кликните на фото, чтобы загрузить новое.');
     }
 
-    // Сохранение текста
-    function saveContent() {
-        localStorage.setItem('siteContent', JSON.stringify({
-            name: document.getElementById('nameText').innerText,
-            subtitle: document.getElementById('subtitleText').innerText,
-            about: document.getElementById('aboutText').innerText
-        }));
-    }
-
-    // Загрузка сохраненного текста при открытии
-    function loadContent() {
-        const saved = localStorage.getItem('siteContent');
-        if (saved) {
-            const data = JSON.parse(saved);
-            if (data.name) document.getElementById('nameText').innerText = data.name;
-            if (data.subtitle) document.getElementById('subtitleText').innerText = data.subtitle;
-            if (data.about) document.getElementById('aboutText').innerText = data.about;
+    // Активация редактирования кликом (если режим включен)
+    function activateEdit() {
+        if (isEditMode) {
+            // Ничего не делаем, элементы уже contentEditable
         }
     }
 
-    // Смена аватара
-    function changeAvatar() {
-        if (!isEditing.status) { alert('Сначала войдите в режим редактирования (пароль SorV)'); return; }
+    // Сохранение изменений
+    function saveChanges() {
+        // Сохраняем текст
+        const data = {
+            name: document.getElementById('nameText').innerText,
+            subtitle: document.getElementById('subtitleText').innerText,
+            about: document.getElementById('aboutText').innerText
+        };
+        localStorage.setItem('roshidere_data', JSON.stringify(data));
+
+        // Выключаем режим редактирования
+        isEditMode = false;
+        document.getElementById('saveBtn').style.display = 'none';
+
+        const texts = ['nameText', 'subtitleText', 'aboutText'];
+        texts.forEach(id => {
+            const el = document.getElementById(id);
+            el.contentEditable = "false";
+            el.style.backgroundColor = "transparent";
+        });
+
+        alert('Изменения сохранены!');
+    }
+
+    // Загрузка аватара
+    function uploadAvatar() {
+        if (!isEditMode) return;
         document.getElementById('fileInput').click();
     }
 
-    function uploadAvatar(input) {
+    function changeAvatar(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('avatarImg').src = e.target.result;
-                localStorage.setItem('avatarImg', e.target.result);
+                localStorage.setItem('avatar_base64', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-    // Смена большой фотографии
-    function changePhoto() {
-        if (!isEditing.status) { alert('Сначала войдите в режим редактирования (пароль SorV)'); return; }
+    // Загрузка фото в галерею
+    function uploadPhoto() {
+        if (!isEditMode) return;
         document.getElementById('photoInput').click();
     }
 
-    function uploadPhoto(input) {
+    function changePhoto(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('photoImg').src = e.target.result;
-                localStorage.setItem('photoImg', e.target.result);
+                localStorage.setItem('photo_base64', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
-
-    // Загрузка сохраненных картинок
-    function loadImages() {
-        const savedAvatar = localStorage.getItem('avatarImg');
-        const savedPhoto = localStorage.getItem('photoImg');
-        if (savedAvatar) document.getElementById('avatarImg').src = savedAvatar;
-        if (savedPhoto) document.getElementById('photoImg').src = savedPhoto;
-    }
-
-    // Инициализация
-    window.onload = function() {
-        loadContent();
-        loadImages();
-        
-        // Проверка "Фона" для сохранения фона в браузере (если захотите менять и его)
-        const savedBg = localStorage.getItem('bgImg');
-        if (savedBg) {
-            document.body.style.backgroundImage = `url('${savedBg}'), linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8))`;
-        }
-    };
 </script>
 
 </body>
