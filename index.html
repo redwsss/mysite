@@ -3,80 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моя биография</title>
+    <title>Roshidere Aesthetic | Биография</title>
+    <!-- Подключаем элегантный шрифт Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
+        /* Основной фон (Алиса) */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-image: url('bg.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
         }
-        /* Прозрачный размытый слой для лучшей читаемости */
+
+        /* Затемняющий слой для читаемости */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(240,248,255,0.7) 100%);
+            z-index: -1;
+        }
+
+        /* Контейнер с эффектом "стекла" */
         .container {
             max-width: 800px;
             margin: 50px auto;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
+
         h1 {
             text-align: center;
-            color: #2c3e50;
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: #1e3a8a; /* Глубокий синий, как глаза Алисы */
+            margin-bottom: 5px;
+            letter-spacing: 1px;
         }
-        h2 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-            color: #2980b9;
+
+        .subtitle {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 40px;
         }
+
+        /* Аватарка в стиле аниме-карточки */
         .avatar {
             display: block;
-            margin: 0 auto 20px;
-            width: 200px;
-            height: 200px;
+            margin: 0 auto 30px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 4px #bfdbfe, 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
         }
+        
+        .avatar:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Заголовки секций */
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #2563eb;
+            border-bottom: 2px solid #93c5fd;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
         p, li {
             font-size: 18px;
-            line-height: 1.6;
+            line-height: 1.8;
+            color: #334155;
+        }
+
+        /* Списки */
+        ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        ul li::before {
+            content: "✦";
+            color: #60a5fa;
+            margin-right: 10px;
+        }
+
+        /* Картинки внутри сайта */
+        .content-img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        /* Кнопка-ссылка в стиле аниме */
+        .btn {
+            display: inline-block;
+            background: #3b82f6;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
+<div class="overlay"></div>
+
 <div class="container">
-    <!-- Чтобы вставить свое фото, загрузите его в репозиторий с именем myavatar.jpg -->
+    <!-- Вставьте сюда свою фотку, назвав её myavatar.jpg и загрузив в репозиторий -->
     <img src="myavatar.jpg" class="avatar" alt="Моё фото">
     
     <h1>Ваше Имя</h1>
-    <p style="text-align: center;">Ваш слоган или профессия</p>
+    <p class="subtitle">「 Эстетика Roshidere 」</p>
 
     <h2>Обо мне</h2>
-    <p>Напишите здесь немного о себе. Что вы любите, чем занимаетесь.</p>
+    <p>Я человек, вдохновленный атмосферой аниме "Рошидере". Люблю красивые вещи, утонченный стиль и идеальные моменты. Моя жизнь как хорошая сцена из тайтла — сюжетная, красивая и с легким холодком.</p>
 
-    <h2>Мои достижения</h2>
+    <h2>Мои увлечения</h2>
     <ul>
-        <li>Первое достижение</li>
-        <li>Второе достижение</li>
-        <li>Третье достижение</li>
+        <li>Рисование и скетчинг</li>
+        <li>Просмотр эстетичных аниме</li>
+        <li>Чтение книг под дождем</li>
     </ul>
 
-    <h2>Мои фото</h2>
-    <!-- Чтобы вставить картинку в статью, загрузите её и вставьте код ниже -->
-    <img src="bg.jpg" alt="Описание фото" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
-    
-    <h2>Контакты</h2>
-    <p>Вконтакте / Telegram / Почта: <b>ваш_ник</b></p>
+    <h2>Моя галерея</h2>
+    <!-- Загрузите свою картинку в репозиторий, назовите её photo1.jpg -->
+    <img src="bg.jpg" class="content-img" alt="Скриншот из аниме или ваше фото">
+
+    <h2>Связаться со мной</h2>
+    <p>Если вам близка моя эстетика или хотите обсудить что-то интересное:</p>
+    <a href="#" class="btn">Мой Telegram</a>
 </div>
 
 </body>
